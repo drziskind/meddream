@@ -1,0 +1,13 @@
+<IfModule proxy_module>
+<IfModule proxy_http_module>
+ProxyPass /meddream/api http://127.0.0.1:8080/ nocanon
+ProxyPassReverse /meddream/api http://127.0.0.1:8080/ nocanon
+ProxyPass /meddream/api/study/open ws://127.0.0.1:8080/study/open
+ProxyPassReverse /meddream/api/study/open ws://127.0.0.1:8080/study/open
+#RewriteEngine on
+#RewriteCond %{HTTP:UPGRADE} ^WebSocket$ [NC]
+#RewriteCond %{HTTP:CONNECTION} Upgrade$ [NC]
+#RewriteRule /meddream/api/(study/open.*) ws://127.0.0.1:8080/$1 [P]
+</IfModule>
+</IfModule>
+
