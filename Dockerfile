@@ -1,6 +1,7 @@
 FROM php:7.1-apache
-RUN apt-get update
-RUN apt-get install -y unzip vim net-tools ffmpeg less
+RUN apt-get update \
+	&& apt-get install -y unzip vim net-tools ffmpeg less \
+	&& rm -rf /var/lib/apt/lists/*
 RUN mkdir -p /jre8 /opt/meddream /archive /usr/lib64/php/modules /usr/lib/php/modules
 COPY MedDreamViewer-7.1.1.zip /
 COPY jre-8u231-linux-x64.tar.gz /
@@ -12,7 +13,7 @@ RUN cp -R /MedDreamViewer-7.1.1/MedDreamViewer/services /opt/meddream/services
 COPY application.properties /opt/meddream/services/
 ENV JAVA_HOME=/jre8/jre1.8.0_231
 ENV PATH="${JAVA_HOME}/bin:${PATH}"
-EXPOSE 8080/tcp
+EXPOSE 8080
 RUN chown www-data:www-data /opt/meddream/services
 RUN find /opt/meddream/services -type d -exec chmod 775 {} \;
 RUN find /opt/meddream/services -type f -exec chmod 664 {} \;
@@ -36,5 +37,5 @@ RUN find /var/www/html/meddream -type f -exec chmod 664 {} \;
 RUN find /var/www/html/meddream -iname "*.sh" -exec chmod 775 {} \;	
 COPY apache /
 RUN cat /apache >> /etc/apache2/apache2.conf
-
+RUN rm -rf /MedDreamViewer-7.1.1/ && rm -rf /opt/meddream/services/jre1.8.0_202
 CMD ["/start.sh"]
