@@ -1,6 +1,6 @@
 FROM php:7.1-apache
 RUN apt-get update \
-	&& apt-get install -y unzip vim net-tools ffmpeg less \
+	&& apt-get install -y unzip vim net-tools ffmpeg less iputils-ping \
 	&& rm -rf /var/lib/apt/lists/*
 RUN mkdir -p /jre8 /opt/meddream /archive /usr/lib64/php/modules /usr/lib/php/modules
 COPY MedDreamViewer-7.1.1.zip /
