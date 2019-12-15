@@ -37,5 +37,7 @@ RUN find /var/www/html/meddream -type f -exec chmod 664 {} \;
 RUN find /var/www/html/meddream -iname "*.sh" -exec chmod 775 {} \;	
 COPY apache /
 RUN cat /apache >> /etc/apache2/apache2.conf
+RUN sed -i '/LogFormat.*\bcombined/s/%h/%\{X-Forwarded-For\}i/' /etc/apache2/apache2.conf
 RUN rm -rf /MedDreamViewer-7.1.1/ && rm -rf /opt/meddream/services/jre1.8.0_202
+ENTRYPOINT ["/usr/bin/env"]
 CMD ["/start.sh"]
