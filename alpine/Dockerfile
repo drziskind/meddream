@@ -31,7 +31,8 @@ RUN unzip /MedDreamViewer-7.1.1.zip \
 	&& find /var/www/localhost/htdocs/meddream -type f -exec chmod 664 {} \; \
 	&& rm -rf /MedDreamViewer-7.1.1	
 RUN sed -i "s/#LoadModule deflate_module/LoadModule deflate_module/" /etc/apache2/httpd.conf \
-	&& sed -i "s/#LoadModule rewrite_module/LoadModule rewrite_module/" /etc/apache2/httpd.conf
+	&& sed -i "s/#LoadModule rewrite_module/LoadModule rewrite_module/" /etc/apache2/httpd.conf \
+	&& sed -i '/LogFormat.*\bcombined/s/%h/%\{X-Forwarded-For\}i/' /etc/apache2/httpd.conf
 
 
 RUN echo "extension=php7.1_meddream-x86_64.so" >> /etc/php7/php.ini
