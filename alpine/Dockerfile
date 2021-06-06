@@ -2,7 +2,7 @@ FROM alpine:3.7
 #RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
 
 #bugfix
-RUN mkdir /run/apache2 && chmod 660 /run/apache2
+RUN mkdir /run/apache2 && mkdir /logs && chmod 660 /run/apache2
 
 # Add basics first
 RUN apk add --no-cache \

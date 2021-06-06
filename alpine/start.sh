@@ -1,4 +1,4 @@
 #!/bin/ash
-sh -c /startCore.sh > startJavaCore.stdout.log 2> startJavaCore.stderr.log &
-httpd -D FOREGROUND > apache.stdout.log 2> apache.stderr.log
+sh -c /startCore.sh >> /logs/startJavaCore.stdout.log 2>> /logs/startJavaCore.stderr.log &
+httpd -D FOREGROUND >> /logs/apache.stdout.log 2>> /logs/apache.stderr.log
 ash
